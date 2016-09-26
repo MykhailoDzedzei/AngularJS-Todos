@@ -1,0 +1,29 @@
+{
+  "name": "todos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "angular": "1.5.6",
+    "body-parser": "1.15.1",
+    "bootstrap": "3.3.6",
+    "express": "^4.14.0",
+    "mongoose": "4.5.0"
+  },
+  "devDependencies": {
+    "gulp": "3.9.1"
+  },
+  "scripts": {
+    "start": "node src/server/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://MykhailoDzedzei@github.com/MykhailoDzedzei/AngularJS-Todos.git"
+  },
+  "author": "MishaDzedzei",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MykhailoDzedzei/AngularJS-Todos/issues"
+  },
+  "homepage": "https://github.com/MykhailoDzedzei/AngularJS-Todos#readme"
+}

@@ -1,4 +1,5 @@
 node_modules
+dist
 jspm_packages
 
 # Optional npm cache directory

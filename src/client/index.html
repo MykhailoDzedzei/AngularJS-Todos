@@ -4,12 +4,54 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src='scripts/bundle.js'></script>
+    <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.js"></script>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 </head>
 <body ng-controller='mainCtrl'>
-<h1>mishaaa!</h1>
-<input type="text" ng-model="note.title">
-<textarea name="text" id="" cols="30" rows="10" ng-model= "note.noteBody"></textarea>
-<button ng-click = 'send(note)'>click me</button>
+<div class="container">
+    <div class="row">
+        <h2 class="text-center">Enter you new Note!</h2>
+        <form class="form-horizontal col-md-6 col-md-offset-3">
+            <div class="form-group">
+
+                <input type="text" ng-model="note.title" placeholder="Title" class="form-control">
+
+
+                <textarea name="text" cols="40" rows="5" ng-model="note.noteBody" placeholder="Enter text" class="form-control"></textarea>
+
+
+                <button ng-click='send(note)' class="btn btn-danger col-md-3">Save</button>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+
+<div class="container"></div>
+<div class="grid"  data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }'>
+    <div class="grid-item" ng-repeat="n in allNotes">
+       <span>{{n.title}}</span>
+        <p>{{n.noteBody}}</p>
+        <button ng-click='edit(n.id)' class="btn btn-primary col-md-1">Edit</button>
+        <button ng-click='delete(n.id)' class="btn btn-danger col-md-1">Delete</button>
+
+        </div>
+
+</div>
+<!--<div class="grid notes"  data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }'>-->
+    <!--<div class="grid-item noteBlock notes"   ng-repeat="note in allNotes.data">-->
+        <!--<div>-->
+            <!--<div class="title notes">{{note.title}}</div>-->
+            <!--<div class="noteBody notes">{{note.noteBody}}</div>-->
+
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
 
 </body>
 </html>

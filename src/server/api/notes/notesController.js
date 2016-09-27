@@ -3,7 +3,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 var notesSchema = new Schema({
-    note: {type: String, required: true},
+    id: {type: Number, required: true},
+    title: {type: String, required: true},
+    noteBody: {type: String, required: true},
     deleted: {type: Boolean}
 });
 

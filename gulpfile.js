@@ -50,9 +50,7 @@ gulp.task('html', function () {
 gulp.task('translate', () => {
     return gulp.src([config.paths.js])
         .pipe(babel({
-            plugins: [
-                "transform-es2015-modules-commonjs"
-            ]
+            presets: ['es2015']
         }))
         .pipe(gulp.dest(config.paths.temp));
 });

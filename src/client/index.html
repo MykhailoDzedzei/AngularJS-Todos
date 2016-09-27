@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="list">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src='scripts/bundle.js'></script>
 </head>
-<body>
+<body ng-controller='mainCtrl'>
 <h1>mishaaa!</h1>
-<script src = '../../dist'></script>
+<input type="text" ng-model="name.user">
+<button ng-click = 'send(name.user)'>click me</button>
+
 </body>
 </html>

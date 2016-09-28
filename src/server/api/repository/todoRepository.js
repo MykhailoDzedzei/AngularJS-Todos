@@ -1,18 +1,7 @@
-const mongoose = require('mongoose');
-
-const Schema = mongoose.Schema;
-
-var notesSchema = new Schema({
-    id: {type: Number, required: true},
-    title: {type: String, required: true},
-    noteBody: {type: String, required: true},
-    deleted: {type: Boolean}
-});
-
-module.exports = mongoose.model('list', notesSchema);
+const todoList = require('../model/todoScheme');
 
 const showAll = function (callback) {
-    this.find((err, notes) => {
+    todoList.find((err, notes) => {
         if (err) {
             console.log(err);
             return res.status(500).send();
@@ -35,8 +24,7 @@ const createNote = function (newNote, callback) {
     });
 };
 const updateNote = function(id, updatedData, callback) {
-    list = this;
-    list.findOneAndUpdate(
+    todoList.findOneAndUpdate(
         {_id:id},
         {$set: {
             noteBody: updatedData
@@ -54,7 +42,7 @@ const updateNote = function(id, updatedData, callback) {
 };
 
 const deleteNote = function (id, callback) {
-    this.findOneAndUpdate(id, {
+    todoList.findOneAndUpdate(id, {
             $set: {
                 deleted: true
             }

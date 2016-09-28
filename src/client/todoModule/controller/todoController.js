@@ -1,3 +1,5 @@
+"use strict";
+
 export default ['$scope', 'todoService', function ($scope, todoService) {
     $scope.editMode = false;
     const getNotes = () => {
@@ -21,7 +23,6 @@ export default ['$scope', 'todoService', function ($scope, todoService) {
                 $scope.note = {};
                 getNotes();
             });
-
         }
         else {
             todoService.editNote($scope.note).then(() => {
@@ -32,8 +33,10 @@ export default ['$scope', 'todoService', function ($scope, todoService) {
         }
 
     };
+    
     $scope.edit = (id) => {
         $scope.editMode = true;
+        //find todoNote by id
         for (let i = 0; i < $scope.allNotes.length; i++) {
             if (id == $scope.allNotes[i].id) {
                 $scope.note = {
@@ -46,6 +49,7 @@ export default ['$scope', 'todoService', function ($scope, todoService) {
         }
 
     };
+    
     $scope.delete = (id) => {
         for (let i = 0; i < $scope.allNotes.length; i++) {
             if (id == $scope.allNotes[i].id) {

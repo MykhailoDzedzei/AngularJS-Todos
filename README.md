@@ -4,8 +4,9 @@
 ###Technologies:
 
 ##### Actual:
-- AngularJS
-- Node / npm / Gulp / Babel / WebPack
+- AngularJS / NG-Route
+- Node / npm
+- Gulp / Babel / WebPack
 - Bootstrap
 - Mongoose
 - MongoDB

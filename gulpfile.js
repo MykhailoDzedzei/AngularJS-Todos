@@ -11,7 +11,7 @@ var config = {
     port: 9005,
     devBaseUrl: 'http://localhost',
     paths: {
-        html: './src/client/*.html',
+        html: './src/client/**/*.html',
         js: './src/client/**/*.js',
         css: [
             'node_modules/bootstrap/dist/css/bootstrap.min.css',

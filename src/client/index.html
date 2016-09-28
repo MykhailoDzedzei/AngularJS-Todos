@@ -7,62 +7,7 @@
     <link rel="stylesheet" href="css/bundle.css"/>
 </head>
 <body>
-<div ng-controller="todoController">
-    <div class="container">
-        <div class="page-header">
-            <h1 class="text-center">Welcome to my ToDo app!</h1>
-        </div>
-
-
-        <div class="container">
-
-                <form name="form" class="form">
-                    <div class="form-group">
-                        <label class="sr-only" for="textTitle">User name</label>
-                        <input type="text" ng-model="note.title" class="form-control" id="textTitle"
-                               placeholder="Title" ng-disabled="editMode" required/>
-                    </div>
-                    <div class="form-group">
-                        <label class="sr-only" for="textNote">Password</label>
-                        <textarea  ng-model="note.noteBody" class="form-control" id="textNote"
-                               placeholder="Enter text" required></textarea>
-                    </div>
-                    <button type="submit" ng-click="send(note)" class="btn btn-success col-md-2"
-                            ng-disabled="form.$invalid" ng-hide="">Submit
-                    </button>
-                </form>
-
-        </div>
-        <div class="container">
-
-                    <table class="table table-striped">
-                        <h1 class="text-center">Notes</h1>
-                        <div>
-                            <tr>
-                                <th>Title</th>
-                                <th>Note</th>
-                                <th>Action</th>
-                            </tr>
-                            <tr ng-repeat="n in allNotes">
-                                <td>{{n.title}}</td>
-                                <td>{{n.noteBody}}</td>
-                                <td class="col-md-2">
-                                    <button class="btn btn-primary" ng-click="edit(n.id)" ng-hide="editMode">
-                                        Edit
-                                    </button>
-                                    <button class="btn btn-danger" ng-click="delete(n.id)" ng-hide="editMode">
-                                        Delete
-                                    </button>
-                                </td>
-
-                            </tr>
-
-                        </div>
-                    </table>
-
-        </div>
-
-    </div>
+<div ng-view></div>
 </div>
 <footer class="footer">
     <div class="container">

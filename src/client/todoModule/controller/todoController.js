@@ -1,14 +1,11 @@
-import angular from "angular";
-module.exports = angular.module("list.main", [])
-    .controller('mainCtrl', ['$scope', 'todoService', function ($scope, todoService) {
+export default ['$scope', 'todoService', function ($scope, todoService) {
     $scope.editMode = false;
-    function getNotes() {
+    const getNotes = () => {
         todoService.getAllNotes().then((data) => {
             $scope.allNotes = [];
             $scope.allNotes = data.data;
-            console.log($scope.allNotes);
         })
-    }
+    };
 
     $scope.note = {
         title: '',
@@ -18,7 +15,7 @@ module.exports = angular.module("list.main", [])
     };
 
     getNotes();
-    $scope.send = function () {
+    $scope.send = () => {
         if ($scope.note._id === "" || $scope.note._id === undefined) {
             todoService.sendData($scope.note).then(() => {
                 $scope.note = {};
@@ -35,10 +32,9 @@ module.exports = angular.module("list.main", [])
         }
 
     };
-    $scope.edit = function (id) {
+    $scope.edit = (id) => {
         $scope.editMode = true;
-        console.log($scope.allNotes[0]);
-        for (var i = 0; i < $scope.allNotes.length; i++) {
+        for (let i = 0; i < $scope.allNotes.length; i++) {
             if (id == $scope.allNotes[i].id) {
                 $scope.note = {
                     title: $scope.allNotes[i].title,
@@ -50,11 +46,9 @@ module.exports = angular.module("list.main", [])
         }
 
     };
-    $scope.delete = function (id) {
-        console.log('delete');
-        for (var i = 0; i < $scope.allNotes.length; i++) {
+    $scope.delete = (id) => {
+        for (let i = 0; i < $scope.allNotes.length; i++) {
             if (id == $scope.allNotes[i].id) {
-                console.log($scope.allNotes[i], 'element for delete');
                 todoService.deleteNote($scope.allNotes[i]).then(() => {
                     getNotes();
                 });
@@ -62,23 +56,4 @@ module.exports = angular.module("list.main", [])
             }
         }
     }
-
-}])
-    .service('todoService', ['$http', function ($http) {
-        this.sendData = function (data) {
-            console.log(data);
-            return $http.post('http://localhost:3000/add', data);
-        };
-        this.getAllNotes = function () {
-            return $http.get('http://localhost:3000/allNotes');
-        };
-        this.editNote = function (data) {
-            return $http.post('http://localhost:3000/edit', data).then((res) => {
-                console.log(res);
-            });
-        };
-        this.deleteNote = function (data) {
-            return $http.post('http://localhost:3000/delete', data);
-        }
-    }]);
-
+}];

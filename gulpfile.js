@@ -16,8 +16,7 @@ var config = {
         css: [
             'node_modules/bootstrap/dist/css/bootstrap.min.css',
             'node_modules/bootstrap/dist/css/bootstrap-theme.min.css',
-            'src/client/css/style.css'
-
+            './src/client/css/style.css'
         ],
         dist: './dist',
         temp: './dist/temp',

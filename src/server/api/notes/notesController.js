@@ -36,8 +36,6 @@ const createNote = function (newNote, callback) {
 };
 const updateNote = function(id, updatedData, callback) {
     list = this;
-    console.log(updatedData,' updated data');
-    console.log(id, 'sssssss');
     list.findOneAndUpdate(
         {_id:id},
         {$set: {
@@ -45,9 +43,7 @@ const updateNote = function(id, updatedData, callback) {
         }},
         {upsert:true},
         function (err, editedNote) {
-            console.log(editedNote, 'edited note');
             if(err) {
-                console.log("errorrrrrrr");
                 callback(editedNote)
             }else {
                 editedNote.noteBody = updatedData;
@@ -66,7 +62,6 @@ const deleteNote = function (id, callback) {
         {upset: true},
         (err, updatedNote) => {
             if (err) {
-                console.log('error occured ' + err);
                 return res.status(500).send();
             } else {
                 updatedNote.deleted = true;
@@ -75,6 +70,7 @@ const deleteNote = function (id, callback) {
             }
         });
 };
+
 
 module.exports.showAll = showAll;
 module.exports.createNote = createNote;

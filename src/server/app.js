@@ -21,18 +21,10 @@ app.use(bodyParser.json());
 
 app.get('/allNotes', function (req, res) {
     mongoose.model('list').find(function (err, data) {
-        console.log(data.length);
-        // for(var i = 0; i < data.length; i++) {
-        //     console.log(data[i].deleted, 'before if');
-        //     if(data[i].deleted === true) {
-        //         console.log(data[i].deleted, 'after if');
-        //         delete data[i];
-        //     }
-        // }
-        function isBigEnough(value) {
+        function check(value) {
             return value.deleted !== true;
         }
-        var a = data.filter(isBigEnough);
+        var a = data.filter(check);
         res.send(a)
     });
 
@@ -44,7 +36,6 @@ app.post('/add', function (req, res) {
     newNote.title = req.body.title;
     newNote.noteBody = req.body.noteBody;
     newNote.deleted = false;
-    console.log(newNote);
     var allNotes ;
         mongoose.model('list').find(function (err, data) {
             allNotes = data.length;
@@ -59,7 +50,6 @@ app.post('/add', function (req, res) {
                     console.log(err);
                     res.status(400);
                 } else {
-                    console.log(note);
                     res.send(note);
                 }
             });
@@ -75,13 +65,11 @@ app.post('/edit', function (req, res) {
 });
 
 app.post('/delete', function (req, res) {
-    console.log(req.body, 'IDDD');
+ 
     notesCollection.deleteNote({_id: req.body._id}, (err, foundNote) => {
         if (err) {
-            console.log('here ', foundNote);
             res.status(401).send();
         } else {
-            console.log(foundNote, 'deleted???')
             res.status(204).send(foundNote);
         }
     });

@@ -35,23 +35,28 @@ const createNote = function (newNote, callback) {
     });
 };
 const updateNote = function(id, updatedData, callback) {
-    this.findOneAndUpdate(
-        {_id: id}, {
-            $set: {
-                note: updatedData
+    list = this;
+    console.log(updatedData,' updated data');
+    console.log(id, 'sssssss');
+    list.findOneAndUpdate(
+        {_id:id},
+        {$set: {
+            noteBody: updatedData
+        }},
+        {upsert:true},
+        function (err, editedNote) {
+            console.log(editedNote, 'edited note');
+            if(err) {
+                console.log("errorrrrrrr");
+                callback(editedNote)
+            }else {
+                editedNote.noteBody = updatedData;
+                callback(editedNote);
             }
-        },
-        (err, foundNote) => {
-
-            if (err) {
-                throw err;
-            } else {
-                foundNote.note = updatedData;
-                console.log(foundNote.note, '           s');
-                callback(err, foundNote);
-            }
-        });
+        }
+     );
 };
+
 const deleteNote = function (id, callback) {
     this.findOneAndUpdate(id, {
             $set: {

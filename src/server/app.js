@@ -22,7 +22,18 @@ app.use(bodyParser.json());
 app.get('/allNotes', function (req, res) {
     mongoose.model('list').find(function (err, data) {
         console.log(data.length);
-        res.send(data)
+        // for(var i = 0; i < data.length; i++) {
+        //     console.log(data[i].deleted, 'before if');
+        //     if(data[i].deleted === true) {
+        //         console.log(data[i].deleted, 'after if');
+        //         delete data[i];
+        //     }
+        // }
+        function isBigEnough(value) {
+            return value.deleted !== true;
+        }
+        var a = data.filter(isBigEnough);
+        res.send(a)
     });
 
 
@@ -58,22 +69,19 @@ app.post('/add', function (req, res) {
 
 });
 app.post('/edit', function (req, res) {
-    notesCollection.updateNote({_id: id}, data, (err, foundNote) => {
-        if (err) {
-            console.log('err  ', err);
-            res.status(401).send();
-        } else {
+    notesCollection.updateNote({_id:req.body._id}, req.body.noteBody, (foundNote) => {
             res.status(204).send(foundNote);
-        }
     });
 });
 
-app.get('/delete', function (req, res) {
-    notesCollection.deleteNote({_id: id}, (err, foundNote) => {
+app.post('/delete', function (req, res) {
+    console.log(req.body, 'IDDD');
+    notesCollection.deleteNote({_id: req.body._id}, (err, foundNote) => {
         if (err) {
-            console.log('err  ', err);
+            console.log('here ', foundNote);
             res.status(401).send();
         } else {
+            console.log(foundNote, 'deleted???')
             res.status(204).send(foundNote);
         }
     });

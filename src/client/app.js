@@ -1,4 +1,5 @@
 import 'angular';
+import masonry from 'masonry-layout';
 import list from './controller';
 module.exports = angular.module('list', [
     list.name

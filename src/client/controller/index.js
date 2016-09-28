@@ -1,42 +1,68 @@
 import angular from "angular";
-module.exports = angular.module("list.main", []).controller('mainCtrl', ['$scope', 'todoService', function ($scope, todoService) {
-
-    $scope.users = [{name:23},{name:23},{name:23}];
-
+module.exports = angular.module("list.main", [])
+    .controller('mainCtrl', ['$scope', 'todoService', function ($scope, todoService) {
+    $scope.editMode = false;
     function getNotes() {
         todoService.getAllNotes().then((data) => {
             $scope.allNotes = [];
             $scope.allNotes = data.data;
-            $scope.users.push();
             console.log($scope.allNotes);
         })
     }
 
     $scope.note = {
         title: '',
-        noteBody: ''
+        noteBody: '',
+        id: '',
+        _id: ''
     };
 
     getNotes();
     $scope.send = function () {
-        todoService.sendData($scope.note).then(() => {
-            getNotes();
-        });
-    }
-    $scope.edit = function (ide) {
-        for(let i = 0; $scope.allNotes.length; i++) {
-            if(ide == $scope.allNotes[i].id) {
+        if ($scope.note._id === "" || $scope.note._id === undefined) {
+            todoService.sendData($scope.note).then(() => {
+                $scope.note = {};
+                getNotes();
+            });
+
+        }
+        else {
+            todoService.editNote($scope.note).then(() => {
+                $scope.editMode = false;
+                $scope.note = {};
+                getNotes();
+            });
+        }
+
+    };
+    $scope.edit = function (id) {
+        $scope.editMode = true;
+        console.log($scope.allNotes[0]);
+        for (var i = 0; i < $scope.allNotes.length; i++) {
+            if (id == $scope.allNotes[i].id) {
                 $scope.note = {
-                    title: $scope.allNotes.title,
-                    noteBody: $scope.allNotes.noteBody
+                    title: $scope.allNotes[i].title,
+                    noteBody: $scope.allNotes[i].noteBody,
+                    id: $scope.allNotes[i].id,
+                    _id: $scope.allNotes[i]._id
                 }
             }
         }
-        
-    }
-    $scope.delete = function (id) {
 
+    };
+    $scope.delete = function (id) {
+        console.log('delete');
+        for (var i = 0; i < $scope.allNotes.length; i++) {
+            if (id == $scope.allNotes[i].id) {
+                console.log($scope.allNotes[i], 'element for delete');
+                todoService.deleteNote($scope.allNotes[i]).then(() => {
+                    getNotes();
+                });
+
+            }
+        }
     }
+
 }])
     .service('todoService', ['$http', function ($http) {
         this.sendData = function (data) {
@@ -45,12 +71,14 @@ module.exports = angular.module("list.main", []).controller('mainCtrl', ['$scope
         };
         this.getAllNotes = function () {
             return $http.get('http://localhost:3000/allNotes');
-        }
+        };
         this.editNote = function (data) {
-            return $http.post('http://localhost:3000/edit',data);
+            return $http.post('http://localhost:3000/edit', data).then((res) => {
+                console.log(res);
+            });
+        };
+        this.deleteNote = function (data) {
+            return $http.post('http://localhost:3000/delete', data);
         }
-        this.deleteNote = function () {
-            return $http.get('http://localhost:3000/delete');
-        }
-    }])
+    }]);
 

@@ -1,5 +1,8 @@
 # AngularJS-Todos
-
+To start project you need to do those steps:
+- npm install
+- npm start
+- gulp
 
 ###Technologies:
 

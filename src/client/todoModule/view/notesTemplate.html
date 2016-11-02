@@ -1,0 +1,30 @@
+<div class="container">
+
+    <table class="table table-striped">
+        <div class="animated fadeInDown">
+            <h1 class="text-center">Notes <a class="btn btn-success" href="/">To main page</a></h1>
+        </div>
+        <div>
+            <tr>
+                <th>Title</th>
+                <th>Note</th>
+                <th>Action</th>
+            </tr>
+            <tr ng-repeat="n in allNotes">
+                <td>{{n.title}}</td>
+                <td>{{n.noteBody}}</td>
+                <td class="col-md-2">
+                    <button class="btn btn-primary" ng-click="edit(n.id)" ng-hide="editMode">
+                        Edit
+                    </button>
+                    <button class="btn btn-danger" ng-click="delete(n.id)" ng-hide="editMode">
+                        Delete
+                    </button>
+                </td>
+
+            </tr>
+
+        </div>
+    </table>
+
+</div>

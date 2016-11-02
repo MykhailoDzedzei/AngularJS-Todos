@@ -8,3 +8,7 @@
 .container .text-muted {
     margin: 20px 0;
 }
+.welcomeText {
+    /*-webkit-animation-duration: 1s;*/
+    /*-webkit-animation-delay: 1s;*/
+}

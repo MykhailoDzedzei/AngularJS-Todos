@@ -6,7 +6,7 @@ let open = require('gulp-open'); // Open a URL in a web browser
 let webpack = require('webpack-stream');
 let concat = require('gulp-concat'); // concatenates files
 let babel = require('gulp-babel');
-
+let shell = require('gulp-shell');
 var config = {
     port: 9005,
     devBaseUrl: 'http://localhost',
@@ -16,6 +16,7 @@ var config = {
         css: [
             'node_modules/bootstrap/dist/css/bootstrap.min.css',
             'node_modules/bootstrap/dist/css/bootstrap-theme.min.css',
+            'node_modules/animate.css/animate.min.css',
             './src/client/css/style.css'
         ],
         dist: './dist',
@@ -81,5 +82,9 @@ gulp.task('watch', function () {
     gulp.watch(config.paths.js, ['js']);
 
 });
+gulp.task('npm', function () {
+    return gulp.src('src/server/app.js')
+    .pipe(shell('npm run start'));
+});
 
-gulp.task('default', ['html', 'js', 'css', 'open', 'watch']);
+gulp.task('default', ['html', 'js', 'css', 'open', 'watch', 'npm']);

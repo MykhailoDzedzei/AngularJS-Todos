@@ -82,9 +82,9 @@ gulp.task('watch', function () {
     gulp.watch(config.paths.js, ['js']);
 
 });
-gulp.task('npm', function () {
-    return gulp.src('src/server/app.js')
-    .pipe(shell('npm run start'));
-});
+// gulp.task('npm', function () {
+//     return gulp.src('src/server/app.js')
+//     .pipe(shell('npm run start'));
+// });
 
-gulp.task('default', ['html', 'js', 'css', 'open', 'watch', 'npm']);
+gulp.task('default', ['html', 'js', 'css', 'open', 'watch']);

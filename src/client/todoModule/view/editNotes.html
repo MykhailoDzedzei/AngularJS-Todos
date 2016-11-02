@@ -1,12 +1,9 @@
-<div class="container">
-    <div class="page-header welcomeText animated fadeInUp">
-        <h1 class="text-center">Welcome to my ToDo app!   <a class="btn btn-warning" href="/#/notes">To all Notes</a></h1>
-    </div>
-
-
-    <div class="container">
-
-        <form name="form" class="form" id="somes">
+<div>
+    <div>
+        <div class="modal-header">
+            <h3 class="modal-title">Here you can edit your Note</h3>
+        </div>
+        <form name="form" class="form">
             <div class="form-group">
                 <label class="sr-only" for="textTitle">User name</label>
                 <input type="text" ng-model="note.title" class="form-control" id="textTitle"
@@ -17,11 +14,15 @@
                         <textarea ng-model="note.noteBody" class="form-control" id="textNote"
                                   placeholder="Enter text" required></textarea>
             </div>
-            <button type="submit" ng-click="send(note)" class="btn btn-success col-md-2 misha"
-                    ng-disabled="form.$invalid" ng-hide="">Submit
-            </button>
-        </form>
 
+        </form>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">Save new Note</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
     </div>
 
+
 </div>
+
+

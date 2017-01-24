@@ -6,16 +6,16 @@ let socket = conf.host + ":" + conf.port + "/";
 
 export default function ($http) {
     this.sendData = (data) => {
-        return $http.post(socket + 'add', data);
+        return $http.post(socket + 'notes', data);
     };
     this.getAllNotes = () => {
-        return $http.get(socket + 'allNotes');
+        return $http.get(socket + 'notes');
     };
     this.editNote = (data) => {
-        return $http.post(socket + 'edit', data);
+        return $http.put(socket + 'notes/' + data._id, data);
     };
     this.deleteNote = (data) => {
-        return $http.post(socket + 'delete', data);
+        return $http.delete(socket + 'notes/' + data._id, data);
     }
 };
 

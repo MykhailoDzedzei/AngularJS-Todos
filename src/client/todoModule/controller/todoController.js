@@ -1,15 +1,10 @@
 "use strict";
 export default ['$scope', 'todoService', function ($scope, todoService) {
     $scope.editMode = false;
-
-
     $scope.isCollapsed = true;
     $scope.isCollapsedHorizontal = false;
-
-
     const getNotes = () => {
         todoService.getAllNotes().then((data) => {
-            console.log(data)
             $scope.allNotes = [];
             $scope.allNotes = data.data;
         })
@@ -17,24 +12,21 @@ export default ['$scope', 'todoService', function ($scope, todoService) {
 
     $scope.editFunc = (id) => {
         $scope.isCollapsed = false;
-
         $scope.editMode = true;
         //find todoNote by id
         for (let i = 0; i < $scope.allNotes.length; i++) {
-            if (id == $scope.allNotes[i].id) {
+            if (id == $scope.allNotes[i]._id) {
                 $scope.note = {
                     title: $scope.allNotes[i].title,
                     noteBody: $scope.allNotes[i].noteBody,
-                    id: $scope.allNotes[i].id,
                     status: $scope.allNotes[i].status,
                     _id: $scope.allNotes[i]._id
                 }
             }
         }
 
-
     };
-    
+
     $scope.saveChanges = () => {
         todoService.editNote($scope.note).then(() => {
             $scope.editMode = false;
@@ -42,9 +34,9 @@ export default ['$scope', 'todoService', function ($scope, todoService) {
             getNotes();
             $scope.isCollapsed = true;
         });
-    }
+    };
 
-    var e = angular.element(document.getElementById("somes"));
+    const e = angular.element(document.getElementById("somes"));
 
     function sendAnimation() {
 
@@ -57,22 +49,14 @@ export default ['$scope', 'todoService', function ($scope, todoService) {
     getNotes();
     $scope.send = () => {
         sendAnimation();
-        if ($scope.note._id === "" || $scope.note._id === undefined) {
-            todoService.sendData($scope.note).then(() => {
-
-                $scope.note = {};
-                getNotes();
-            });
-        }
-        else {
-
-        }
-
+        todoService.sendData($scope.note).then(() => {
+            $scope.note = {};
+            getNotes();
+        });
     };
-
     $scope.delete = (id) => {
         for (let i = 0; i < $scope.allNotes.length; i++) {
-            if (id == $scope.allNotes[i].id) {
+            if (id == $scope.allNotes[i]._id) {
                 todoService.deleteNote($scope.allNotes[i]).then(() => {
                     getNotes();
                 });

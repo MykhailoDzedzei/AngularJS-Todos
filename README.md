@@ -1,5 +1,5 @@
 # AngularJS-Todos
-To start project you need to do those steps:
+To start project you need to have MongoDB and do those steps:
 - npm install
 - gulp
 

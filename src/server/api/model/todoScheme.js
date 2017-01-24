@@ -6,6 +6,7 @@ var notesSchema = new Schema({
     id: {type: Number, required: true},
     title: {type: String, required: true},
     noteBody: {type: String, required: true},
+    status: {type: Boolean, required: true},
     deleted: {type: Boolean}
 });
 

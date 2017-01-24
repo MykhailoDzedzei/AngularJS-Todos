@@ -20,6 +20,7 @@ router.post('/add', function (req, res) {
     var newNote = new todoList();
     newNote.title = req.body.title;
     newNote.noteBody = req.body.noteBody;
+    newNote.status = false;
     newNote.deleted = false;
     var allNotes;
     mongoose.model('list').find(function (err, data) {
@@ -43,7 +44,7 @@ router.post('/add', function (req, res) {
 });
 
 router.post('/edit', function (req, res) {
-    notesCollection.updateNote({_id: req.body._id}, req.body.noteBody, (foundNote) => {
+    notesCollection.updateNote({_id: req.body._id}, req.body.noteBody, req.body.status, (foundNote) => {
         res.status(204).send(foundNote);
     });
 });

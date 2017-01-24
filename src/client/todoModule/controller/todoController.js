@@ -1,27 +1,51 @@
 "use strict";
-import editController from './editController';
-export default ['$scope', 'todoService','$uibModal', function ($scope, todoService, $uibModal) {
+export default ['$scope', 'todoService', function ($scope, todoService) {
     $scope.editMode = false;
+
+
+    $scope.isCollapsed = true;
+    $scope.isCollapsedHorizontal = false;
+
+
     const getNotes = () => {
         todoService.getAllNotes().then((data) => {
+            console.log(data)
             $scope.allNotes = [];
             $scope.allNotes = data.data;
         })
     };
-    $scope.editFunc = () => {
 
-        const deleteInstance = $uibModal.open({
-            animation: true,
-            templateUrl: "todoModule/view/editNotes.html",
-            controller: editController
-        });
-        // deleteInstance.result.then(() => {
-        //     ProfileService.deleteAccount();
-        //     $scope.logOutClick($scope.user._id);
-        //     $location.path("/");
-        // });
+    $scope.editFunc = (id) => {
+        $scope.isCollapsed = false;
+
+        $scope.editMode = true;
+        //find todoNote by id
+        for (let i = 0; i < $scope.allNotes.length; i++) {
+            if (id == $scope.allNotes[i].id) {
+                $scope.note = {
+                    title: $scope.allNotes[i].title,
+                    noteBody: $scope.allNotes[i].noteBody,
+                    id: $scope.allNotes[i].id,
+                    status: $scope.allNotes[i].status,
+                    _id: $scope.allNotes[i]._id
+                }
+            }
+        }
+
+
     };
+    
+    $scope.saveChanges = () => {
+        todoService.editNote($scope.note).then(() => {
+            $scope.editMode = false;
+            $scope.note = {};
+            getNotes();
+            $scope.isCollapsed = true;
+        });
+    }
+
     var e = angular.element(document.getElementById("somes"));
+
     function sendAnimation() {
 
         e.addClass('animated bounceOutRight');
@@ -35,20 +59,17 @@ export default ['$scope', 'todoService','$uibModal', function ($scope, todoServi
         sendAnimation();
         if ($scope.note._id === "" || $scope.note._id === undefined) {
             todoService.sendData($scope.note).then(() => {
+
                 $scope.note = {};
                 getNotes();
             });
         }
         else {
-            todoService.editNote($scope.note).then(() => {
-                $scope.editMode = false;
-                $scope.note = {};
-                getNotes();
-            });
+
         }
 
     };
-    
+
     $scope.delete = (id) => {
         for (let i = 0; i < $scope.allNotes.length; i++) {
             if (id == $scope.allNotes[i].id) {

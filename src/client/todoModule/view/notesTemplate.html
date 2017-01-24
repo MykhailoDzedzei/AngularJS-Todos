@@ -1,6 +1,6 @@
 <div class="container">
 
-    <table class="table table-striped">
+    <table class="table">
         <div class="animated fadeInDown">
             <h1 class="text-center">Notes <a class="btn btn-success" href="/">To main page</a></h1>
         </div>
@@ -10,11 +10,12 @@
                 <th>Note</th>
                 <th>Action</th>
             </tr>
-            <tr ng-repeat="n in allNotes">
+            <tr ng-repeat="n in allNotes" ng-class="{'bg-success': n.status}">
                 <td>{{n.title}}</td>
                 <td>{{n.noteBody}}</td>
                 <td class="col-md-2">
-                    <button class="btn btn-primary" ng-click="editFunc(n.id)" ng-hide="editMode">
+                    <button class="btn btn-primary" ng-click="editFunc(n.id); isCollapsed = !isCollapsed"
+                            ng-hide="editMode">
                         Edit
                     </button>
                     <button class="btn btn-danger" ng-click="delete(n.id)" ng-hide="editMode">
@@ -26,5 +27,24 @@
 
         </div>
     </table>
+
+
+
+
+    <div uib-collapse="isCollapsed">
+        <div class="well well-lg">
+            <input type="checkbox" id="checked" ng-model="note.status">
+            <label for="checked">Click for change status</label>
+            <input type="text" ng-model="note.noteBody" class="form-control" id="textTitle"
+                   placeholder="Body" required/>
+        </div>
+
+
+
+
+        <button  class="btn btn-success"  ng-click="saveChanges(note)"> Save changes</button>
+
+    </div>
+
 
 </div>

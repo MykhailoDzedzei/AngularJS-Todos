@@ -5,7 +5,7 @@ import todoService from './service/todoService';
 import uiRoute from 'angular-ui-router';
 import ngAnimate from 'angular-animate';
 import todoController from './controller/todoController';
-import editController from './controller/editController';
+//import editController from './controller/editController';
 import uiBootstrap from 'angular-ui-bootstrap';
 module.exports = angular.module("list.main", [
     uiRoute,
@@ -13,7 +13,6 @@ module.exports = angular.module("list.main", [
     uiBootstrap
 ])
     .controller("todoController", todoController)
-    .controller("editController", editController)
     .service('todoService', todoService)
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider.state('/', {

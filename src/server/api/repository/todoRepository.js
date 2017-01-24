@@ -23,11 +23,12 @@ const createNote = function (newNote, callback) {
         callback(null, note);
     });
 };
-const updateNote = function(id, updatedData, callback) {
+const updateNote = function(id, updatedData, updatedStatus, callback) {
     todoList.findOneAndUpdate(
         {_id:id},
         {$set: {
-            noteBody: updatedData
+            noteBody: updatedData,
+            status: updatedStatus
         }},
         {upsert:true},
         function (err, editedNote) {

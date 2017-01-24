@@ -1,16 +1,16 @@
 # AngularJS-Todos
 To start project you need to do those steps:
 - npm install
-- npm start
 - gulp
 
 ###Technologies:
 
 ##### Actual:
-- AngularJS / NG-Route
+- AngularJS / UI Route
 - Node / npm
 - Gulp / Babel / WebPack
 - Bootstrap
+ -Animate.css
 - Mongoose
 - MongoDB
 - Express

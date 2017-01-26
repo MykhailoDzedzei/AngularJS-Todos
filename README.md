@@ -6,6 +6,7 @@ To start project you need to have already running MongoDB and then do those step
 ###Technologies:
 
 ##### Actual:
+- Material Design
 - AngularJS / UI Route
 - Node / npm
 - Gulp / Babel / WebPack
@@ -14,4 +15,6 @@ To start project you need to have already running MongoDB and then do those step
 - Mongoose
 - MongoDB
 - Express
+- Passport.js
+
 

@@ -1,23 +1,30 @@
 <div class="container">
     <div class="page-header welcomeText animated fadeInUp">
-        <h1 class="text-center">Welcome to my ToDo app!   <a class="btn btn-warning" href="/#/notes">To all Notes</a></h1>
+        <h1 class="text-center">Welcome to my ToDo app! <md-button class="md-button md-raised md-warn"  href="/#!/notes">To all Notes</md-button>
+        </h1>
     </div>
     <div class="container">
 
-        <form name="form" class="form" id="somes">
-            <div class="form-group">
-                <label class="sr-only" for="textTitle">User name</label>
-                <input type="text" ng-model="note.title" class="form-control" id="textTitle"
-                       placeholder="Title" ng-disabled="editMode" required/>
+        <form name="form" class="form" id="task_form">
+            <div>
+                <md-input-container class="md-block" >
+                    <label>Title for task</label>
+                    <input  type="text" ng-model="note.title"
+                          maxlength="100" required >
+
+                </md-input-container>
             </div>
-            <div class="form-group">
-                <label class="sr-only" for="textNote">Password</label>
-                        <textarea ng-model="note.noteBody" class="form-control" id="textNote"
-                                  placeholder="Enter text" required></textarea>
+            <div>
+                <md-input-container class="md-block" >
+                    <label>Title for task</label>
+                  <textarea ng-model="note.noteBody" class="form-control"
+                            required></textarea>
+
+                </md-input-container>
             </div>
-            <button type="submit" ng-click="send(note)" class="btn btn-success col-md-2 misha"
+            <md-button type="submit" ng-click="send(note)" class="md-raised md-primary"
                     ng-disabled="form.$invalid" ng-hide="">Submit
-            </button>
+            </md-button>
         </form>
 
     </div>

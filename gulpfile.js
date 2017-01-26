@@ -15,6 +15,7 @@ var config = {
         js: './src/client/**/*.js',
         css: [
             'node_modules/bootstrap/dist/css/bootstrap.min.css',
+             'node_modules/angular-material/angular-material.css',
             'node_modules/bootstrap/dist/css/bootstrap-theme.min.css',
             'node_modules/animate.css/animate.min.css',
             './src/client/css/style.css'

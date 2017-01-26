@@ -1,6 +1,5 @@
 "use strict";
 
-import 'angular';
 import list from './todoModule/index';
 import route from 'angular-route';
 

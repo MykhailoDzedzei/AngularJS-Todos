@@ -1,15 +1,19 @@
 "use strict";
 
 import angular from "angular";
+import ngAnimate from 'angular-animate';
+import 'angular-aria';
+import ngMaterial from 'angular-material';
 import todoService from './service/todoService';
 import uiRoute from 'angular-ui-router';
-import ngAnimate from 'angular-animate';
+
 import todoController from './controller/todoController';
 //import editController from './controller/editController';
 import uiBootstrap from 'angular-ui-bootstrap';
 module.exports = angular.module("list.main", [
     uiRoute,
     ngAnimate,
+    ngMaterial,
     uiBootstrap
 ])
     .controller("todoController", todoController)

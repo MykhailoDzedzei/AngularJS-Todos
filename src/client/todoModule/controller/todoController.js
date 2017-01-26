@@ -9,10 +9,16 @@ export default ['$scope', 'todoService', function ($scope, todoService) {
             $scope.allNotes = data.data;
         })
     };
+        
+    $scope.editFunc = (id, status) => {
+        if(status != undefined) {
+            $scope.isCollapsed = true;
+            $scope.editMode = false;
+        }else {
+            $scope.isCollapsed = false;
+            $scope.editMode = true;
+        }
 
-    $scope.editFunc = (id) => {
-        $scope.isCollapsed = false;
-        $scope.editMode = true;
         //find todoNote by id
         for (let i = 0; i < $scope.allNotes.length; i++) {
             if (id == $scope.allNotes[i]._id) {
@@ -26,7 +32,11 @@ export default ['$scope', 'todoService', function ($scope, todoService) {
         }
 
     };
+  $scope.change = (id) => {
 
+      $scope.editFunc(id, '');
+      $scope.saveChanges()
+  };
     $scope.saveChanges = () => {
         todoService.editNote($scope.note).then(() => {
             $scope.editMode = false;
@@ -36,9 +46,9 @@ export default ['$scope', 'todoService', function ($scope, todoService) {
         });
     };
 
-    const e = angular.element(document.getElementById("somes"));
+    let e = angular.element(document.getElementById("task_form"));
 
-    function sendAnimation() {
+    const sendAnimation =  () => {
 
         e.addClass('animated bounceOutRight');
         e.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {

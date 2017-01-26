@@ -5,6 +5,9 @@ import {conf} from "../config/configs";
 let socket = conf.host + ":" + conf.port + "/";
 
 export default function ($http) {
+    this.register = (data) => {
+        return $http.post(socket + 'register', data);
+    };
     this.sendData = (data) => {
         return $http.post(socket + 'notes', data);
     };

@@ -6,9 +6,8 @@ import 'angular-aria';
 import ngMaterial from 'angular-material';
 import todoService from './service/todoService';
 import uiRoute from 'angular-ui-router';
-
 import todoController from './controller/todoController';
-//import editController from './controller/editController';
+import registerController from './controller/registerController';
 import uiBootstrap from 'angular-ui-bootstrap';
 module.exports = angular.module("list.main", [
     uiRoute,
@@ -17,6 +16,7 @@ module.exports = angular.module("list.main", [
     uiBootstrap
 ])
     .controller("todoController", todoController)
+    .controller("registerController", registerController)
     .service('todoService', todoService)
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider.state('/', {
@@ -27,6 +27,11 @@ module.exports = angular.module("list.main", [
             url:'/notes',
             templateUrl:"./todoModule/view/notesTemplate.html",
             controller:'todoController'
+        }).state('register', {
+            url:'/register',
+            templateUrl:"./todoModule/view/register.html",
+            controller:'registerController'
+            
         });
         $urlRouterProvider.otherwise('/');
 

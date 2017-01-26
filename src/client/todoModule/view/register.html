@@ -1,0 +1,32 @@
+<div class="container">
+    <h1>REGISTRATION</h1>
+    <form class="form" ng-submit="register()">
+
+        <md-input-container class="md-block">
+            <label>User name</label>
+            <input type="text" ng-model="user.name"
+                   maxlength="100" required>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Email</label>
+            <input type="text" ng-model="user.email"
+                   maxlength="100" required>
+
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Password</label>
+            <input type="text" ng-model="user.password"
+                   maxlength="100" required>
+
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Confirm password</label>
+            <input type="text" ng-model="user.confirmPassword"
+                   maxlength="100" required>
+
+        </md-input-container>
+
+        <md-button class="md-warn" type="submit">Submit</md-button>
+    </form>
+
+</div>
